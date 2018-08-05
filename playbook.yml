@@ -1,0 +1,7 @@
+---
+
+- name: run playbook tasks
+  hosts: all
+  become: yes
+  roles:
+    - iptables

@@ -1,0 +1,22 @@
+---
+
+- name: prepare firewall
+  tasks:
+    - name: install iptables-persistent
+	      apt:
+          name: iptables-persistent
+          state: present
+        environment:
+          DEBIAN_FRONTEND: noninteractive
+
+    - name: copy iptables rules
+      copy:
+        src: {{ item }} 
+        dest: {{ item }} 
+        owner: root
+        group: root
+        mode: 0644
+        backup: yes
+      with_items:
+        - /etc/iptables/rules.v4
+        - /etc/iptables/rules.v6
